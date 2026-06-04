@@ -17,5 +17,7 @@ onMounted(() => {
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors",
   }).addTo(map);
+
+  L.marker([36.306613, 59.576064]).addTo(map).bindPopup("شرکت ساج ");
 });
 </script>
