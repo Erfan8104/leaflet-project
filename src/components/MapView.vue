@@ -23,5 +23,11 @@ onMounted(() => {
   (points as Point[]).forEach((point) => {
     L.marker([point.lat, point.lng]).addTo(map).bindPopup(point.name);
   });
+
+  const bounds = points.map(
+    (point) => [point.lat, point.lng] as [number, number],
+  );
+
+  map.fitBounds(bounds);
 });
 </script>
