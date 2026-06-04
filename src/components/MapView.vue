@@ -6,6 +6,8 @@
 import { onMounted, ref } from "vue";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import points from "../data/points.json";
+import type { Point } from "../types/point";
 
 const mapContainer = ref<HTMLElement | null>(null);
 
@@ -18,6 +20,8 @@ onMounted(() => {
     attribution: "&copy; OpenStreetMap contributors",
   }).addTo(map);
 
-  L.marker([36.306613, 59.576064]).addTo(map).bindPopup("شرکت ساج ");
+  (points as Point[]).forEach((point) => {
+    L.marker([point.lat, point.lng]).addTo(map).bindPopup(point.name);
+  });
 });
 </script>
