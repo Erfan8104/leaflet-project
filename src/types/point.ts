@@ -3,4 +3,5 @@ export interface Point {
   name: string;
   lat: number;
   lng: number;
+  description: string;
 }
