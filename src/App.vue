@@ -1,3 +1,7 @@
 <template>
-  <h1 class="text-4xl font-bold text-center mt-10">Leaflet Project</h1>
+  <MapView />
 </template>
+
+<script setup lang="ts">
+import MapView from "./components/MapView.vue";
+</script>
