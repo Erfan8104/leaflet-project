@@ -9,6 +9,8 @@ import "leaflet/dist/leaflet.css";
 import points from "../data/points.json";
 import type { Point } from "../types/point";
 import markerIcon from "../assets/marker.svg";
+import NeshanMap from "@neshan-maps-platform/leaflet";
+const neshanApiKey = import.meta.env.VITE_NESHAN_API_KEY;
 
 const mapContainer = ref<HTMLElement | null>(null);
 
@@ -20,12 +22,18 @@ const customIcon = L.icon({
 
 onMounted(() => {
   if (!mapContainer.value) return;
-
-  const map = L.map(mapContainer.value).setView([36.33, 59.6], 11);
-
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "&copy; OpenStreetMap contributors",
-  }).addTo(map);
+  console.log("API KEY:", neshanApiKey);
+  console.log("NeshanMap:", NeshanMap);
+  console.log("L.Map =", L.Map);
+  console.log("NeshanMap.Map =", (NeshanMap as any).Map);
+  const map = new (NeshanMap as any).Map(mapContainer.value, {
+    key: neshanApiKey,
+    maptype: "dreamy",
+    poi: true,
+    traffic: false,
+    center: [36.33, 59.6],
+    zoom: 11,
+  });
 
   (points as Point[]).forEach((point) => {
     L.marker([point.lat, point.lng], {
